@@ -317,28 +317,25 @@ function submitBooking() {
 
   console.log('📋 HCC Booking:', booking);
 
-  // Send email notification
+  // Send email notification via EmailJS
   try {
-    fetch('/.netlify/functions/send-booking', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        firstName: first,
-        lastName: last,
-        phone,
-        email,
-        address: addr,
-        services: svcs.map(s => s.name),
-        addons: adds.map(a => a.name),
-        date: dateStr,
-        time: selTime,
-        total,
-        notes
-      })
-    }).then(r => {
-      if (r.ok) console.log('✉️ Email notification sent');
-      else console.warn('⚠️ Email failed to send');
-    }).catch(err => console.warn('⚠️ Email error:', err));
+    emailjs.init('nXQUsDLhh1813vy2u');
+    emailjs.send('service_wzwcvbp', 'template_cd5md6n', {
+      customer_name: `${first} ${last}`,
+      phone: phone,
+      email: email,
+      address: addr,
+      services: svcs.map(s => s.name).join(', '),
+      addons: adds.length > 0 ? adds.map(a => a.name).join(', ') : 'None',
+      date: dateStr,
+      time: selTime,
+      total: total,
+      notes: notes || 'None'
+    }).then(() => {
+      console.log('✉️ Email notification sent');
+    }).catch(err => {
+      console.warn('⚠️ Email failed:', err);
+    });
   } catch (e) { /* don't block the booking confirmation */ }
 
   // Show confirmation modal
