@@ -18,8 +18,7 @@
       <div class="brand-name">Houston Carpet Cleaning</div>
     </a>
     <nav class="main-nav" id="mainNav">
-      <a href="#services">Services</a>
-      <a href="#schedule">Book Now</a>
+      <a href="#services">Book Now</a>
       <a href="#why">Why HCC</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -64,53 +63,79 @@
   </div>
 </section>
 
+<!-- ══════ COMPACT BOOKING PANEL ══════ -->
 <section class="sect" id="services">
   <div class="contain">
-    <div class="sect-intro rv">
-      <span class="tag">Our Services</span>
-      <h2>Select your <em>services</em></h2>
-      <p>Click to add one or more. Build the perfect cleaning package for your home.</p>
-    </div>
-    <div id="svcGrid" class="svc-grid"></div>
-  </div>
-</section>
 
-<section class="sect sect-navy" id="extras">
-  <div class="contain">
     <div class="sect-intro rv">
-      <span class="tag tag-light">Extras</span>
-      <h2 class="white">Boost your <em>results</em></h2>
-      <p class="white-muted">Professional add-ons for an even deeper clean.</p>
+      <span class="tag">Book Online</span>
+      <h2>Your clean, <em>configured in seconds.</em></h2>
+      <p>Select services, pick extras, choose a time — all right here.</p>
     </div>
-    <div id="addonGrid" class="addon-grid"></div>
-  </div>
-</section>
 
-<section class="sect" id="schedule">
-  <div class="contain">
-    <div class="sect-intro rv">
-      <span class="tag">Book Now</span>
-      <h2>Schedule your <em>appointment</em></h2>
-      <p>Pick a date, time, and fill in your details. We confirm within the hour.</p>
+    <!-- STEP INDICATOR -->
+    <div class="steps-bar rv">
+      <div class="step active" data-step="1"><span class="step-num">1</span><span class="step-lbl">Services</span></div>
+      <div class="step-line"></div>
+      <div class="step" data-step="2"><span class="step-num">2</span><span class="step-lbl">Add-ons</span></div>
+      <div class="step-line"></div>
+      <div class="step" data-step="3"><span class="step-num">3</span><span class="step-lbl">Schedule</span></div>
     </div>
-    <div class="book-wrap">
-      <div class="book-main">
-        <div class="card rv">
-          <div class="card-label">Choose a Date</div>
-          <div class="cal-nav">
-            <button onclick="calPrev()" class="cal-btn">&#8592;</button>
-            <h3 id="calTitle"></h3>
-            <button onclick="calNext()" class="cal-btn">&#8594;</button>
+
+    <!-- MAIN BOOKING PANEL -->
+    <div class="booking-panel rv">
+
+      <!-- LEFT COLUMN: services + addons + scheduler stacked -->
+      <div class="booking-left">
+
+        <!-- MINI SERVICE TILES -->
+        <div class="panel-block" id="panelServices">
+          <div class="panel-hdr">
+            <span class="panel-label">Select Services</span>
+            <span class="panel-hint">Tap to select — choose one or more</span>
           </div>
-          <div class="cal-wk" id="calWk"></div>
-          <div class="cal-days" id="calDays"></div>
+          <div id="svcGrid" class="svc-mini-grid"></div>
         </div>
-        <div class="card rv">
-          <div class="card-label">Choose a Time</div>
-          <div id="timeGrid" class="time-grid"></div>
+
+        <!-- ADDON PILLS -->
+        <div class="panel-block" id="panelAddons">
+          <div class="panel-hdr">
+            <span class="panel-label">Boost Results</span>
+            <span class="panel-hint">Optional extras</span>
+          </div>
+          <div id="addonGrid" class="addon-pills"></div>
         </div>
-        <div class="card rv">
-          <div class="card-label">Your Details</div>
+
+        <!-- CALENDAR + TIME INLINE -->
+        <div class="panel-block" id="panelSchedule">
+          <div class="panel-hdr">
+            <span class="panel-label">Pick a Date &amp; Time</span>
+            <span class="panel-hint">Mon – Sat</span>
+          </div>
+          <div class="cal-time-row">
+            <div class="cal-compact">
+              <div class="cal-nav">
+                <button onclick="calPrev()" class="cal-btn">&#8592;</button>
+                <h3 id="calTitle"></h3>
+                <button onclick="calNext()" class="cal-btn">&#8594;</button>
+              </div>
+              <div class="cal-wk" id="calWk"></div>
+              <div class="cal-days" id="calDays"></div>
+            </div>
+            <div class="time-compact">
+              <div class="panel-hdr" style="margin-bottom:.6rem">
+                <span class="panel-label">Time Slot</span>
+              </div>
+              <div id="timeGrid" class="time-grid-compact"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTACT FORM -->
+        <div class="panel-block" id="panelDetails">
+          <div class="panel-hdr">
+            <span class="panel-label">Your Details</span>
+          </div>
           <div class="row-2">
             <div class="input-wrap"><label>First Name *</label><input type="text" id="inFirst" placeholder="Jane"></div>
             <div class="input-wrap"><label>Last Name *</label><input type="text" id="inLast" placeholder="Doe"></div>
@@ -120,16 +145,20 @@
             <div class="input-wrap"><label>Email *</label><input type="email" id="inEmail" placeholder="jane@email.com"></div>
           </div>
           <div class="input-wrap"><label>Service Address *</label><input type="text" id="inAddr" placeholder="123 Main St, Katy TX 77449"></div>
-          <div class="input-wrap"><label>Special Requests</label><textarea id="inNotes" rows="3" placeholder="Gate code, pets, preferred entry, etc."></textarea></div>
+          <div class="input-wrap"><label>Notes</label><textarea id="inNotes" rows="2" placeholder="Gate code, pets, entry notes…"></textarea></div>
         </div>
+
       </div>
-      <aside class="book-side">
-        <div class="card side-card" id="sideCard">
+
+      <!-- RIGHT COLUMN: sticky order summary -->
+      <aside class="booking-right">
+        <div class="summary-card" id="sideCard">
           <div class="side-hdr"><div class="side-logo">HCC</div><span>Order Summary</span></div>
           <div id="sideBody"><p class="side-empty">Select a service to get started</p></div>
         </div>
       </aside>
-    </div>
+
+    </div><!-- /booking-panel -->
   </div>
 </section>
 
