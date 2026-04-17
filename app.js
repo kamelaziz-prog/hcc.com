@@ -396,7 +396,7 @@ function toggleBurger() { document.getElementById('mainNav').classList.toggle('o
 
 function init() {
   drawServices(); drawAddons(); drawCal(); drawTimes(); drawSummary();
-  runHeroEntrance(); initCounters(); initMagnetic(); revealAll();
+  runHeroEntrance(); initMagnetic(); revealAll();
 
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
